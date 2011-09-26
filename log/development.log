@@ -1,0 +1,96 @@
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (2.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+  [1m[35m (0.5ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "xcoord" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110926213935')[0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at Mon Sep 26 17:39:50 -0400 2011
+Served asset /rails.png - 304 Not Modified (5ms)
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at Mon Sep 26 17:45:10 -0400 2011
+Served asset /rails.png - 304 Not Modified (55ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Sep 26 17:45:38 -0400 2011
+  Processing by WorkoutsController#index as HTML
+  [1m[36mWorkout Load (0.2ms)[0m  [1mSELECT "workouts".* FROM "workouts" [0m
+Rendered workouts/index.html.erb within layouts/application (3.3ms)
+Compiled application.css  (3ms)  (pid 11340)
+Compiled scaffolds.css  (27ms)  (pid 11340)
+Compiled workouts.css  (12ms)  (pid 11340)
+Compiled application.js  (37ms)  (pid 11340)
+Compiled jquery.js  (5ms)  (pid 11340)
+Compiled jquery_ujs.js  (1ms)  (pid 11340)
+Compiled workouts.js  (305ms)  (pid 11340)
+Completed 200 OK in 585ms (Views: 583.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /workouts.css - 304 Not Modified (30ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /scaffolds.css - 304 Not Modified (89ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /jquery.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /workouts.js - 304 Not Modified (22ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:39 -0400 2011
+Served asset /application.js - 304 Not Modified (72ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (12.7ms)
+Rendered workouts/new.html.erb within layouts/application (39.5ms)
+Completed 200 OK in 48ms (Views: 47.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at Mon Sep 26 17:45:42 -0400 2011
+Served asset /application.js - 304 Not Modified (0ms)

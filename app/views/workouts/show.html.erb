@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @workout.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @workout.description %>
+</p>
+
+<p>
+  <b>Xcoord:</b>
+  <%= @workout.xcoord %>
+</p>
+
+<p>
+  <b>Ycoord:</b>
+  <%= @workout.ycoord %>
+</p>
+
+<p>
+  <b>Flagged:</b>
+  <%= @workout.flagged %>
+</p>
+
+
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>

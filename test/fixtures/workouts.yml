@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  xcoord: 1.5
+  ycoord: 1.5
+  flagged: false
+
+two:
+  name: MyString
+  description: MyText
+  xcoord: 1.5
+  ycoord: 1.5
+  flagged: false
