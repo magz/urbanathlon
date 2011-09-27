@@ -14,7 +14,8 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1.json
   def show
     @workout = Workout.find(params[:id])
-
+    @json = @workout.to_gmaps4rails
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @workout }
@@ -80,4 +81,9 @@ class WorkoutsController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  def flag
+    Notifier.flag.deliver
+  end
+    
 end

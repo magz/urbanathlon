@@ -1,4 +1,6 @@
 CmsTest::Application.routes.draw do
+  match "flag" => "workouts#flag"
+  
   resources :workouts
 
   # The priority is based upon order of creation:

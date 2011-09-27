@@ -1,9 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<%= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
+
+
+<%= gmaps4rails(@json)%>
+
+
 <p>
   <b>Name:</b>
   <%= @workout.name %>
 </p>
+<b>url:</b>
+  <%= @workout.photo.url %>
+</p>
+<b>path:</b>
+  <%= @workout.photo.path %>
+</p>
+
 
 <p>
   <b>Description:</b>
@@ -11,13 +24,13 @@
 </p>
 
 <p>
-  <b>Xcoord:</b>
-  <%= @workout.xcoord %>
+  <b>Latitude:</b>
+  <%= @workout.latitude %>
 </p>
 
 <p>
-  <b>Ycoord:</b>
-  <%= @workout.ycoord %>
+  <b>Longitude:</b>
+  <%= @workout.longitude %>
 </p>
 
 <p>
