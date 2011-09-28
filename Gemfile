@@ -12,6 +12,7 @@ gem "paperclip", "~> 2.4.2"
 gem "bhm-google-maps" 
 gem "gmaps4rails"
 gem "capistrano"
+gem "pg"
 
 # Gems used only for assets and not required
 # in production environments by default.
