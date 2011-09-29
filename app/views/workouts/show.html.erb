@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
+<%# took this out for heroku purposes%>
+<%#= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
 
 
 <%= gmaps4rails(@json)%>

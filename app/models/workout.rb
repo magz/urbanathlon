@@ -1,5 +1,6 @@
 class Workout < ActiveRecord::Base
-  has_attached_file :photo, :url => "/system/photos/:id/:basename.:extension", :path => ":rails_root/public/system/photos/:id/:basename.:extension", :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  #temporarily disabled this so it can work on heroku
+  #has_attached_file :photo, :url => "/system/photos/:id/:basename.:extension", :path => ":rails_root/public/system/photos/:id/:basename.:extension", :styles => { :medium => "300x300>", :thumb => "100x100>" }
   acts_as_gmappable
   
 
