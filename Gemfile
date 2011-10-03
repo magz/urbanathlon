@@ -13,6 +13,16 @@ gem "bhm-google-maps"
 gem "gmaps4rails"
 gem "capistrano"
 gem "pg"
+gem "geocoder"
+
+gem "rspec-rails", :group => [:test, :development]
+
+group :development, :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+end
+
 
 # Gems used only for assets and not required
 # in production environments by default.

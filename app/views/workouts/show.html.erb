@@ -4,6 +4,7 @@
 <%#= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
 
 
+
 <%= gmaps4rails(@json)%>
 
 
@@ -12,10 +13,22 @@
   <%= @workout.name %>
 </p>
 <b>url:</b>
-  <%= @workout.photo.url %>
+  <%#= @workout.photo.url %>
 </p>
 <b>path:</b>
-  <%= @workout.photo.path %>
+  <%#= @workout.photo.path %>
+</p>
+
+<p>
+	<b>Location:</b>
+	<% begin %>
+	<%= @workout.city%>
+	<% rescue %>
+	ok that didn't work
+	<% end %>
+<p>
+	  <b>Zip Code:</b>
+	  <%= @workout.zipcode %>
 </p>
 
 
