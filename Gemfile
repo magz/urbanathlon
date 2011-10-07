@@ -14,6 +14,7 @@ gem "gmaps4rails"
 gem "capistrano"
 gem "pg"
 gem "geocoder"
+gem "mongrel"
 
 gem "therubyracer"
 
