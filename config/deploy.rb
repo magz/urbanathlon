@@ -1,7 +1,7 @@
 default_run_options[:pty] = true
 
 #set :application, "urbanathlon.fuzzproductions.com"
-set :application, "http:/urbanathlon.fuzzproductions.com/"
+set :application, "urbanathlon.fuzzproductions.com"
 set :repository,  "git@github.com:magz/urbanathlon.git"
 
 set :scm, :git
@@ -18,7 +18,7 @@ set :scm_passphrase, 'starmane999'
 ssh_options[:forward_agent] = true
 
 set :use_sudo, false
-set :deploy_to, "var/#{application}"
+set :deploy_to, "/home/www_home/#{application}"
 set :deploy_via, :remote_cache
 
 server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
@@ -40,7 +40,6 @@ after "deploy:bundle:gems", "deploy:restart"
  namespace :deploy do
    task :bundle_gems do
      run "cd #{deploy_to}/current && bundle install vendor/gems"
-    echo "ok it got here"
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
