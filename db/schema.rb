@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111003190941) do
+ActiveRecord::Schema.define(:version => 20111004203210) do
 
   create_table "workouts", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20111003190941) do
     t.boolean  "gmaps"
     t.string   "city"
     t.integer  "zipcode"
+    t.integer  "difficulty"
   end
 
 end
