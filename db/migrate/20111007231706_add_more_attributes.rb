@@ -1,4 +1,4 @@
-class AddDifficulty < ActiveRecord::Migration
+class AddMoreAttributes < ActiveRecord::Migration
   def up
     add_column    :workouts, :sponsored, :boolean
     add_column    :workouts, :fitness_tags, :string

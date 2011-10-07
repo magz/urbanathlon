@@ -10951,3 +10951,129 @@ Migrating to AddDifficulty (20111004203210)
   [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
   [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
   [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-07 18:05:23 -0400
+  Processing by WorkoutsController#index as HTML
+  [1m[36mWorkout Load (7.6ms)[0m  [1mSELECT "workouts".* FROM "workouts" [0m
+Rendered workouts/index.html.erb within layouts/application (38.1ms)
+Completed 200 OK in 412ms (Views: 401.9ms | ActiveRecord: 7.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /application.css - 200 OK (18ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails.css - 200 OK (26ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /scaffolds.css - 200 OK (4ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /workouts.css - 200 OK (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /jquery.js - 200 OK (39ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /jquery_ujs.js - 200 OK (5ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 200 OK (77ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 200 OK (5ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 200 OK (5ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 200 OK (5ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 200 OK (13ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /workouts.js - 200 OK (3ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /gmaps4rails/googlemaps.js - 200 OK (48ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-07 18:05:24 -0400
+Served asset /application.js - 200 OK (30ms)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+Migrating to FixLatLongNames (20110927011454)
+Migrating to LatitudeLongitudeNames (20110927152002)
+Migrating to AddCityToWorkouts (20111003190941)
+Migrating to AddDifficulty (20111004203210)
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+Migrating to FixLatLongNames (20110927011454)
+Migrating to LatitudeLongitudeNames (20110927152002)
+Migrating to AddCityToWorkouts (20111003190941)
+Migrating to AddDifficulty (20111004203210)
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20111007231706')[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20111007231706'
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+Migrating to FixLatLongNames (20110927011454)
+Migrating to LatitudeLongitudeNames (20110927152002)
+Migrating to AddCityToWorkouts (20111003190941)
+Migrating to AddDifficulty (20111004203210)
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+Migrating to FixLatLongNames (20110927011454)
+Migrating to LatitudeLongitudeNames (20110927152002)
+Migrating to AddCityToWorkouts (20111003190941)
+Migrating to AddDifficulty (20111004203210)
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "workouts" ADD "sponsored" boolean[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "fitness_tags" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "obstacle" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "MH_suggests" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "editor_comments" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "photo_label" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20111007231706')[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
