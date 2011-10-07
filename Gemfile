@@ -15,6 +15,8 @@ gem "capistrano"
 gem "pg"
 gem "geocoder"
 
+gem "therubyracer"
+
 gem "rspec-rails", :group => [:test, :development]
 
 group :development, :test do
