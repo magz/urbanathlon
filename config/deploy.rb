@@ -18,7 +18,7 @@ set :scm_passphrase, 'starmane999'
 ssh_options[:forward_agent] = true
 
 set :use_sudo, false
-set :deploy_to, "/home/www_home/#{application}"
+set :deploy_to, "/home/michaelmagner/var/http:/#{application}"
 set :deploy_via, :remote_cache
 
 server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
