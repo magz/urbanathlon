@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
-  #temporarily disabled this so it can work on heroku
-  #has_attached_file :photo, :url => "/system/photos/:id/:basename.:extension", :path => ":rails_root/public/system/photos/:id/:basename.:extension", :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  
+  has_attached_file :photo, :url => "/system/photos/:id/:basename.:extension", :path => ":rails_root/public/system/photos/:id/:basename.:extension", :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
   #tags for doing gmaps and reverse geocoding (gmaps4rails and geocoding gems)
   acts_as_gmappable

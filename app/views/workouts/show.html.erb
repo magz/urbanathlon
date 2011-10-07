@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%# took this out for heroku purposes%>
-<%#= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
+<%= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
 
 
 
@@ -13,10 +12,10 @@
   <%= @workout.name %>
 </p>
 <b>url:</b>
-  <%#= @workout.photo.url %>
+  <%= @workout.photo.url %>
 </p>
 <b>path:</b>
-  <%#= @workout.photo.path %>
+  <%= @workout.photo.path %>
 </p>
 
 <p>
