@@ -1,5 +1,6 @@
 class AddDifficulty < ActiveRecord::Migration
   def up
+    add_column    :workouts, :difficulty, :integer
     add_column    :workouts, :sponsored, :boolean
     add_column    :workouts, :fitness_tags, :string
     add_column    :workouts, :obstacle, :string
@@ -10,6 +11,7 @@ class AddDifficulty < ActiveRecord::Migration
   end
 
   def down
+    remove_column    :workouts, :difficulty, :integer
     remove_column    :workouts, :sponsored, :boolean
     remove_column    :workouts, :fitness_tags, :string
     remove_column    :workouts, :obstacle, :string

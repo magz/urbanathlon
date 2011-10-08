@@ -11077,3 +11077,1445 @@ Migrating to AddMoreAttributes (20111007231706)
   [1m[35m (0.3ms)[0m  select sqlite_version(*)
   [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
   [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (21.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (16.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+  [1m[35m (0.5ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "xcoord" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110926213935')[0m
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+  [1m[35m (0.4ms)[0m  ALTER TABLE "workouts" ADD "photo_file_name" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "workouts" ADD "photo_content_type" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "photo_file_size" integer
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "workouts" ADD "photo_updated_at" datetime[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110926221339')
+Migrating to FixLatLongNames (20110927011454)
+  [1m[36m (0.6ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927011454')[0m
+Migrating to LatitudeLongitudeNames (20110927152002)
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "workouts" ADD "gmaps" boolean
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927152002')[0m
+Migrating to AddCityToWorkouts (20111003190941)
+  [1m[35m (0.5ms)[0m  ALTER TABLE "workouts" ADD "city" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "zipcode" integer[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111003190941')
+Migrating to AddDifficulty (20111004203210)
+  [1m[36m (0.7ms)[0m  [1mALTER TABLE "workouts" ADD "sponsored" boolean[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "workouts" ADD "fitness_tags" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "obstacle" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "MH_suggests" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "editor_comments" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "photo_label" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20111004203210')[0m
+Migrating to AddMoreAttributes (20111007231706)
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "sponsored" boolean
+SQLite3::SQLException: duplicate column name: sponsored: ALTER TABLE "workouts" ADD "sponsored" boolean
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+  [1m[35m (0.7ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "xcoord" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110926213935')[0m
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+  [1m[35m (0.5ms)[0m  ALTER TABLE "workouts" ADD "photo_file_name" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "photo_content_type" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "photo_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "photo_updated_at" datetime[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110926221339')
+Migrating to FixLatLongNames (20110927011454)
+  [1m[36m (0.6ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.2ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.6ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927011454')[0m
+Migrating to LatitudeLongitudeNames (20110927152002)
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "gmaps" boolean
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927152002')[0m
+Migrating to AddCityToWorkouts (20111003190941)
+  [1m[35m (0.6ms)[0m  ALTER TABLE "workouts" ADD "city" varchar(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "workouts" ADD "zipcode" integer[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111003190941')
+Migrating to AddDifficulty (20111004203210)
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "workouts" ADD "difficulty" integer[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "sponsored" boolean
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "fitness_tags" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "obstacle" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "MH_suggests" varchar(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "workouts" ADD "editor_comments" varchar(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "workouts" ADD "photo_label" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111004203210')
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("workouts")[0m
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+  Processing by WorkoutsController#index as HTML
+  [1m[36mWorkout Load (0.3ms)[0m  [1mSELECT "workouts".* FROM "workouts" [0m
+Rendered workouts/index.html.erb within layouts/application (22.5ms)
+Completed 200 OK in 173ms (Views: 171.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (52ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /scaffolds.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /workouts.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (11ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /workouts.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:40 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (70.9ms)
+Rendered workouts/new.html.erb within layouts/application (103.5ms)
+Completed 200 OK in 114ms (Views: 112.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:42 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/workouts" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+  Processing by WorkoutsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/dvNNOgesnpuH8kELchjlqUPXfMGpVYitmyNJJlKCuA=", "workout"=>{"name"=>"testing", "description"=>"123", "difficulty"=>"2", "latitude"=>"23", "longitude"=>"23", "flagged"=>"0"}, "commit"=>"Create Workout"}
+  [1m[35mSQL (116.5ms)[0m  INSERT INTO "workouts" ("MH_suggests", "city", "created_at", "description", "difficulty", "editor_comments", "fitness_tags", "flagged", "gmaps", "latitude", "longitude", "name", "obstacle", "photo_content_type", "photo_file_name", "photo_file_size", "photo_label", "photo_updated_at", "sponsored", "updated_at", "zipcode") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["MH_suggests", nil], ["city", nil], ["created_at", Sat, 08 Oct 2011 17:43:50 UTC +00:00], ["description", "123"], ["difficulty", 2], ["editor_comments", nil], ["fitness_tags", nil], ["flagged", false], ["gmaps", true], ["latitude", 23.3112389], ["longitude", 21.8568586], ["name", "testing"], ["obstacle", nil], ["photo_content_type", nil], ["photo_file_name", nil], ["photo_file_size", nil], ["photo_label", nil], ["photo_updated_at", nil], ["sponsored", nil], ["updated_at", Sat, 08 Oct 2011 17:43:50 UTC +00:00], ["zipcode", nil]]
+[paperclip] Saving attachments.
+Redirected to http://localhost:3000/workouts/1
+Completed 302 Found in 472ms
+
+
+Started GET "/workouts/1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mWorkout Load (0.3ms)[0m  [1mSELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1[0m  [["id", "1"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (2.4ms)
+Rendered workouts/show.html.erb within layouts/application (31.5ms)
+Completed 200 OK in 83ms (Views: 56.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:50 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 13:43:51 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (31.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateWorkouts (20110926213935)
+  [1m[35m (0.7ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "xcoord" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110926213935')[0m
+Migrating to AddAttachmentAttributesToWorkout (20110926221339)
+  [1m[35m (0.5ms)[0m  ALTER TABLE "workouts" ADD "photo_file_name" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "photo_content_type" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "photo_file_size" integer
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "photo_updated_at" datetime[0m
+  [1m[35m (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110926221339')
+Migrating to FixLatLongNames (20110927011454)
+  [1m[36m (0.7ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.3ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.8ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "ycoord" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.3ms)[0m  [1mCREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "workouts"[0m
+  [1m[35m (0.2ms)[0m  DROP TABLE "workouts"
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "lat" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("altered_workouts")
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "altered_workouts"[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "altered_workouts"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927011454')[0m
+Migrating to LatitudeLongitudeNames (20110927152002)
+  [1m[35m (0.3ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.5ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "lng" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TEMPORARY TABLE "altered_workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "workouts"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "workouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "description" text, "latitude" float, "longitude" float, "flagged" boolean, "created_at" datetime, "updated_at" datetime, "photo_file_name" varchar(255), "photo_content_type" varchar(255), "photo_file_size" integer, "photo_updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("altered_workouts")[0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "altered_workouts"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "altered_workouts"[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "workouts" ADD "gmaps" boolean
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110927152002')[0m
+Migrating to AddCityToWorkouts (20111003190941)
+  [1m[35m (0.4ms)[0m  ALTER TABLE "workouts" ADD "city" varchar(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "workouts" ADD "zipcode" integer[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111003190941')
+Migrating to AddDifficulty (20111004203210)
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "workouts" ADD "difficulty" integer[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "sponsored" boolean
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "fitness_tags" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "obstacle" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "MH_suggests" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "workouts" ADD "editor_comments" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "workouts" ADD "photo_label" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20111004203210')
+  [1m[36m (0.4ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("workouts")[0m
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+  Processing by WorkoutsController#index as HTML
+  [1m[36mWorkout Load (0.6ms)[0m  [1mSELECT "workouts".* FROM "workouts" [0m
+Rendered workouts/index.html.erb within layouts/application (210.1ms)
+Completed 200 OK in 300ms (Views: 295.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /scaffolds.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /workouts.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:04 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:05 -0400
+Served asset /workouts.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:05 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:05 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/workouts/1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mWorkout Load (0.3ms)[0m  SELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1  [["id", "1"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (2.6ms)
+Rendered workouts/show.html.erb within layouts/application (22.5ms)
+Completed 200 OK in 57ms (Views: 32.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:07:32 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mWorkout Load (0.2ms)[0m  [1mSELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1[0m  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (0.7ms)
+Rendered workouts/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 35ms (Views: 13.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /application.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:08:05 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[35mWorkout Load (0.2ms)[0m  SELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (0.8ms)
+Rendered workouts/show.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 40ms (Views: 16.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /scaffolds.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:09:00 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mWorkout Load (0.2ms)[0m  [1mSELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1[0m  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (0.7ms)
+Rendered workouts/show.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 37ms (Views: 14.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /jquery.js - 304 Not Modified (53ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:09:21 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[35mWorkout Load (0.2ms)[0m  SELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (0.7ms)
+Rendered workouts/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 37ms (Views: 13.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:09:44 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mWorkout Load (0.2ms)[0m  [1mSELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1[0m  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (0.6ms)
+Rendered workouts/show.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 38ms (Views: 15.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:10:47 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.7ms)
+
+
+Started GET "/workouts/14" for 127.0.0.1 at 2011-10-08 14:11:28 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[35mWorkout Load (0.2ms)[0m  SELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1  [["id", "14"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (1.0ms)
+Rendered workouts/show.html.erb within layouts/application (52.5ms)
+Completed 200 OK in 85ms (Views: 62.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:11:29 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.8ms)
+
+
+Started GET "/workouts" for 127.0.0.1 at 2011-10-08 14:11:39 -0400
+  Processing by WorkoutsController#index as HTML
+  [1m[36mWorkout Load (0.5ms)[0m  [1mSELECT "workouts".* FROM "workouts" [0m
+Rendered workouts/index.html.erb within layouts/application (199.1ms)
+Completed 200 OK in 213ms (Views: 209.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:40 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (75.1ms)
+Rendered workouts/new.html.erb within layouts/application (76.7ms)
+Completed 200 OK in 87ms (Views: 85.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:11:41 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (72.6ms)
+Rendered workouts/new.html.erb within layouts/application (73.7ms)
+Completed 200 OK in 85ms (Views: 84.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:30 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (73.0ms)
+Rendered workouts/new.html.erb within layouts/application (74.0ms)
+Completed 200 OK in 84ms (Views: 83.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:12:56 -0400
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 14:13:37 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (77.6ms)
+Rendered workouts/new.html.erb within layouts/application (78.9ms)
+Completed 200 OK in 90ms (Views: 88.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:13:38 -0400
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/workouts/new" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+  Processing by WorkoutsController#new as HTML
+Rendered workouts/_form.html.erb (78.7ms)
+Rendered workouts/new.html.erb within layouts/application (79.9ms)
+Completed 200 OK in 89ms (Views: 88.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:16 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/workouts" for 127.0.0.1 at 2011-10-08 14:14:38 -0400
+  Processing by WorkoutsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/dvNNOgesnpuH8kELchjlqUPXfMGpVYitmyNJJlKCuA=", "workout"=>{"name"=>"test", "sponsored"=>"0", "description"=>"testing", "fitness_tags"=>"123", "obstacle"=>"123", "difficulty"=>"4", "MH_suggests"=>"run faster!", "editor_comments"=>"yup, good idea", "latitude"=>"23", "longitude"=>"25", "flagged"=>"0"}, "commit"=>"Create Workout"}
+  [1m[35mSQL (110.5ms)[0m  INSERT INTO "workouts" ("MH_suggests", "city", "created_at", "description", "difficulty", "editor_comments", "fitness_tags", "flagged", "gmaps", "latitude", "longitude", "name", "obstacle", "photo_content_type", "photo_file_name", "photo_file_size", "photo_label", "photo_updated_at", "sponsored", "updated_at", "zipcode") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["MH_suggests", "run faster!"], ["city", "El Wahat El Dakhla"], ["created_at", Sat, 08 Oct 2011 18:14:39 UTC +00:00], ["description", "testing"], ["difficulty", 4], ["editor_comments", "yup, good idea"], ["fitness_tags", "123"], ["flagged", false], ["gmaps", true], ["latitude", 24.5455638], ["longitude", 27.1735316], ["name", "test"], ["obstacle", "123"], ["photo_content_type", nil], ["photo_file_name", nil], ["photo_file_size", nil], ["photo_label", nil], ["photo_updated_at", nil], ["sponsored", false], ["updated_at", Sat, 08 Oct 2011 18:14:39 UTC +00:00], ["zipcode", nil]]
+[paperclip] Saving attachments.
+Redirected to http://localhost:3000/workouts/48
+Completed 302 Found in 985ms
+
+
+Started GET "/workouts/48" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+  Processing by WorkoutsController#show as HTML
+  Parameters: {"id"=>"48"}
+  [1m[36mWorkout Load (0.2ms)[0m  [1mSELECT "workouts".* FROM "workouts" WHERE "workouts"."id" = ? LIMIT 1[0m  [["id", "48"]]
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/gmaps4rails-1.1.7/app/views/gmaps4rails/_gmaps4rails.html.erb (1.0ms)
+Rendered workouts/show.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 75ms (Views: 47.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.css?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /workouts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.base.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/gmaps4rails.base.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.bing.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/gmaps4rails.bing.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/gmaps4rails.googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.mapquest.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/gmaps4rails.mapquest.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/gmaps4rails.openlayers.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/gmaps4rails.openlayers.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/workouts.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /workouts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/gmaps4rails/googlemaps.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /gmaps4rails/googlemaps.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/photos/thumb/missing.png" for 127.0.0.1 at 2011-10-08 14:14:39 -0400
+
+ActionController::RoutingError (No route matches [GET] "/photos/thumb/missing.png"):
+  
+
+Rendered /Users/michaelmagner/.rvm/gems/ruby-1.9.2-p180/gems/actionpack-3.1.0/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.6ms)

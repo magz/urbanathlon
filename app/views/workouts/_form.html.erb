@@ -16,13 +16,35 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :sponsored %><br />
+    <%= f.check_box :sponsored %>
+  </div>
+
+  <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
+  </div>
+<div class="field">
+    <%= f.label :fitness_tags %><br />
+    <%= f.text_field :fitness_tags %>
+  </div>
+<div class="field">
+    <%= f.label :obstacle %><br />
+    <%= f.text_field :obstacle %>
   </div>
   <div class="field">
     <%= f.label :difficulty %><br />
     <%= f.text_field :difficulty %>
   </div>
+ <div class="field">
+    <%= f.label :MH_suggests %><br />
+    <%= f.text_field :MH_suggests %>
+  </div>
+<div class="field">
+    <%= f.label :editor_comments %><br />
+    <%= f.text_field :editor_comments %>
+  </div>
+
 
   <div class="field">
     <%= f.label :latitude %><br />

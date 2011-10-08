@@ -11,13 +11,14 @@
   <b>Name:</b>
   <%= @workout.name %>
 </p>
-<b>url:</b>
-  <%= @workout.photo.url %>
+<p>
+  <b>Sponsored:</b>
+  <%= @workout.sponsored %>
 </p>
-<b>path:</b>
-  <%= @workout.photo.path %>
+<p>
+  <b>Created At:</b>
+  <%= @workout.created_at %>
 </p>
-
 <p>
 	<b>Location:</b>
 	<% begin %>
@@ -25,10 +26,7 @@
 	<% rescue %>
 	ok that didn't work
 	<% end %>
-<p>
-	  <b>Zip Code:</b>
-	  <%= @workout.zipcode %>
-</p>
+
 
 
 <p>
@@ -47,6 +45,25 @@
 <p>
   <b>Longitude:</b>
   <%= @workout.longitude %>
+</p>
+
+
+<p>
+  <b>Editor Comments:</b>
+  <%= @workout.editor_comments %>
+</p>
+
+<p>
+  <b>Obstacle Type:</b>
+  <%= @workout.obstacle %>
+</p>
+<p>
+  <b>Fitness Tags:</b>
+  <%= @workout.fitness_tags %>
+</p>
+<p>
+  <b>Men's Health Suggests:</b>
+  <%= @workout.MH_suggests %>
 </p>
 
 <p>
