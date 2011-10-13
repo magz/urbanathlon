@@ -1,3 +1,8 @@
+<b> PHOTO LABEL </b>
+<%= @workout.photo_label %>
+
+
+
 <%= form_for @workout, :html => { :multipart => true } do |f| %>
   <% if @workout.errors.any? %>
     <div id="error_explanation">
@@ -10,6 +15,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+	<b>photo file goes here </b>
+	<%= f.file_field :photo %>
+  </div>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -58,11 +67,34 @@
     <%= f.label :flagged %><br />
     <%= f.check_box :flagged %>
   </div>
+  <div class="field">
+    <%= f.label :user_generated %><br />
+    <%= f.check_box :user_created %>
+  </div>
+
   <div>
   <div class="field">
-    <%= f.file_field :photo %>
-  </div>
-  <div class="actions">
+  	<b>Obstacle Tags</b>
+<br />
+	<% @obstacle_tags.each do |tag| %>
+		<%= f.label ("obstac_" + tag.tr(" ", "_")).to_sym %><br />
+		<%= f.check_box ("obstac_" + tag.tr(" ", "_")).to_sym %><br />
+	<% end %>
+	</div>
+  <div class="field">
+  	<b>Fitness Tags</b>
+<br />
+	<% @fitness_tags.each do |tag| %>
+		<%= f.label ("fit_" + tag.tr(" ", "_")).to_sym %><br />
+		<%= f.check_box ("fit_" + tag.tr(" ", "_")).to_sym %><br />
+	<% end %>
+	</div>
+
+		
+	    
+
+
+<div class="actions">
     <%= f.submit %>
   </div>
 <% end %>

@@ -16,6 +16,9 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     @json = @workout.to_gmaps4rails
     
+    @fitness_tags = ["agility", "balance", "cardio", "core", "endurance", "lower body", "relaxation", "speed", "stability", "stretch", "stretching", "total body", "whole body", "upper body"]
+    @obstacle_tags = ["balance beam", "ball fields", "barricade", "bars", "beach", "bench", "bike rack", "concrete ledge", "court", "field", "fountain edge", "grass field", "hill", "hurdles", "outdoor gym", "park", "picnic benches", "playground", "sand dunes", "stadium steps", "stairs", "track",  "trail"]
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @workout }
@@ -26,6 +29,10 @@ class WorkoutsController < ApplicationController
   # GET /workouts/new.json
   def new
     @workout = Workout.new
+    
+    @fitness_tags = ["agility", "balance", "cardio", "core", "endurance", "lower body", "relaxation", "speed", "stability", "stretch", "stretching", "total body", "whole body", "upper body"]
+    @obstacle_tags = ["balance beam", "ball fields", "barricade", "bars", "beach", "bench", "bike rack", "concrete ledge", "court", "field", "fountain edge", "grass field", "hill", "hurdles", "outdoor gym", "park", "picnic benches", "playground", "sand dunes", "stadium steps", "stairs", "track",  "trail"]
+    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +43,10 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1/edit
   def edit
     @workout = Workout.find(params[:id])
+    
+    @fitness_tags = ["agility", "balance", "cardio", "core", "endurance", "lower body", "relaxation", "speed", "stability", "stretch", "stretching", "total body", "whole body", "upper body"]
+    @obstacle_tags = ["balance beam", "ball fields", "barricade", "bars", "beach", "bench", "bike rack", "concrete ledge", "court", "field", "fountain edge", "grass field", "hill", "hurdles", "outdoor gym", "park", "picnic benches", "playground", "sand dunes", "stadium steps", "stairs", "track",  "trail"]
+    
   end
 
   # POST /workouts

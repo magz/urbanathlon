@@ -4,6 +4,7 @@ class Workout < ActiveRecord::Base
   
   #tags for doing gmaps and reverse geocoding (gmaps4rails and geocoding gems)
   acts_as_gmappable
+  
   reverse_geocoded_by :latitude, :longitude do |obj, results|
     if geo = results.first
       # populate your model

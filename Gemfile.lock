@@ -94,6 +94,9 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
+    mongrel_cluster (1.0.5)
+      gem_plugin (>= 0.2.3)
+      mongrel (>= 1.0.2)
     multi_json (1.0.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -196,6 +199,7 @@ DEPENDENCIES
   jquery-rails
   json
   mongrel (= 1.2.0.pre2)
+  mongrel_cluster
   paperclip (~> 2.4.2)
   pg
   rails (= 3.1.0)

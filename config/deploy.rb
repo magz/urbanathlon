@@ -1,6 +1,5 @@
 default_run_options[:pty] = true
 
-#set :application, "urbanathlon.fuzzproductions.com"
 set :application, "urbanathlon.fuzzproductions.com"
 set :repository,  "git@github.com:magz/urbanathlon.git"
 

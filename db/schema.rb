@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111011174225) do
+ActiveRecord::Schema.define(:version => 20111012162525) do
 
   create_table "workouts", :force => true do |t|
     t.string   "name"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20111011174225) do
     t.boolean  "obstac_stairs"
     t.boolean  "obstac_track"
     t.boolean  "obstac_trail"
+    t.boolean  "user_created"
   end
 
 end
