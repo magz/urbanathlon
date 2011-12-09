@@ -16,6 +16,8 @@ gem "pg"
 gem "geocoder"
 gem "mongrel", "1.2.0.pre2"
 gem "mongrel_cluster"
+gem "rake", "~> 0.9.2.2"
+gem "kaminari", "~> 0.12.4"
 
 gem "therubyracer"
 

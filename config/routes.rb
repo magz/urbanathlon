@@ -1,4 +1,10 @@
 CmsTest::Application.routes.draw do
+  resources :ratings
+
+  resources :workout_tags
+
+  resources :users
+
   match "flag" => "workouts#flag"
   
   resources :workouts
@@ -9,6 +15,12 @@ CmsTest::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+    match "users/create_follow/:id/:followed_user(.:format)" => "users#add_followed_user"
+    match "users/remove_follow/:id/:followed_user(.:format)" => "users#remove_followed_user"
+    
+    match "users/leaderboard/:type(.:format)" => "users#leaderboard"
+    #do this one as /:friend_list?  Does that work with arrays?
+    match "users/find_fb_friends/:friend_list(.:format)" => "users#find_fb_friends_from_list"
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

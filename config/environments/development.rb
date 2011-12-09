@@ -6,7 +6,7 @@ CmsTest::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   
   #changing this to speed things up
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true

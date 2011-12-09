@@ -1,6 +1,8 @@
 class Workout < ActiveRecord::Base
-  
+  has_many :workout_tags
+  has_many :ratings
   has_attached_file :photo, :url => "/system/photos/:id/:basename.:extension", :path => ":rails_root/public/system/photos/:id/:basename.:extension", :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  
   
   #tags for doing gmaps and reverse geocoding (gmaps4rails and geocoding gems)
   acts_as_gmappable
@@ -23,7 +25,17 @@ class Workout < ActiveRecord::Base
     "#{self.latitude}, #{self.longitude}"
   end
   
-  
+  def update_average_rating
+    x = 0
+    puts x
+    if self.ratings.count
+      self.ratings.each do |rating|
+        x += rating.value
+      end
+      self.average_rating = x / self.ratings.count
+      self.save
+    end
+  end
 
 
 end

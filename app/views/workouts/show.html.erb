@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 <%= link_to 'Home', workouts_path %>
 
 <%= image_tag @workout.photo.url(:thumb), :height => '50', :width => '50'  %>
@@ -55,14 +55,6 @@
 </p>
 
 <p>
-  <b>Obstacle Type:</b>
-  <%= @workout.obstacle %>
-</p>
-<p>
-  <b>Fitness Tags:</b>
-  <%= @workout.fitness_tags %>
-</p>
-<p>
   <b>Men's Health Suggests:</b>
   <%= @workout.MH_suggests %>
 </p>
@@ -72,23 +64,17 @@
   <%= @workout.flagged %>
 </p>
 <p>
-  <b>Obstacle Tags:</b>
-	<br>
+	<p>
+	  <b>User Created by user #:</b>
+	  <%= @workout.created_by_id %>
+	</p>
+	<p>
 
-<% @obstacle_tags.each do |tag| %>
-	<%= tag + "= " +  @workout.send("obstac_" + tag.tr(" ","_")).to_s    %>  
-	<br>
-<% end %>
+ <% @workout.workout_tags.each do |tag| %>
+<p> 	
+<%= tag.category + " : " + tag.name  %> 
 </p>
-<p>
-  <b>Fitness Tags:</b>
-	<br>
-
-<% @fitness_tags.each do |tag| %>
-	<%= tag + "= " +  @workout.send("fit_" + tag.tr(" ","_")).to_s    %>  
-	<br>
-<% end %>
-</p>
+	<% end %>
 
 
 <%= link_to 'Edit', edit_workout_path(@workout) %> |

@@ -2,6 +2,7 @@ class WorkoutsController < ApplicationController
   # GET /workouts
   # GET /workouts.json
   def index
+    
     @workouts = Workout.all
 
     respond_to do |format|
@@ -16,8 +17,6 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     @json = @workout.to_gmaps4rails
     
-    @fitness_tags = ["agility", "balance", "cardio", "core", "endurance", "lower body", "relaxation", "speed", "stability", "stretch", "stretching", "total body", "whole body", "upper body"]
-    @obstacle_tags = ["balance beam", "ball fields", "barricade", "bars", "beach", "bench", "bike rack", "concrete ledge", "court", "field", "fountain edge", "grass field", "hill", "hurdles", "outdoor gym", "park", "picnic benches", "playground", "sand dunes", "stadium steps", "stairs", "track",  "trail"]
     
     respond_to do |format|
       format.html # show.html.erb
@@ -96,5 +95,6 @@ class WorkoutsController < ApplicationController
   def flag
     Notifier.flag.deliver
   end
-    
+  
+  #need to create a route for this
 end

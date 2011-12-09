@@ -1,3 +1,31 @@
+task :move_to_obstacle_tag_model => :environment do
+  puts "this utility moves from the dumb way of organizing obstacle/fitness tags to organizing them as a model"
+  Workout.all.each do |workout|
+    
+    obstacle_tags = ["balance_beam", "ball_fields", "barricade", "bars", "beach", "bench", "bike_rack", "concrete_ledge", "court", "field", "fountain_edge", "grass_field", "hill", "hurdles", "outdoor_gym", "park", "picnic_benches", "playground", "sand_dunes", "stadium_steps", "stairs", "track",  "trail"]
+    
+    obstacle_tags.each do |tag|
+      if workout.send("obstac_"+tag) == true
+        WorkoutTag.create(:category => "obstacle", :name => tag.tr("_", " ").rstrip, :workout_id => workout.id)
+      end
+    end
+  end
+end
+
+task :move_to_fitness_tag_model => :environment do
+  puts "this utility moves from the dumb way of organizing obstacle/fitness tags to organizing them as a model"
+  Workout.all.each do |workout|
+    
+    fitness_tags = ["agility", "balance", "cardio", "core", "endurance", "lower_body", "relaxation", "speed", "stability", "stretch", "stretching", "total_body", "whole_body", "upper_body"]
+    
+    fitness_tags.each do |tag|
+      if workout.send("fit_"+tag) == true
+        WorkoutTag.create(:category => "fitness", :name => tag.tr("_", " ").rstrip, :workout_id => workout.id)
+      end
+    end
+  end
+end
+
 task :obstacle_tag_parser => :environment do
   puts "this utility will parse out the obstacle tags from the obstacle_tags strings into the various obstacle tag booleans"
   obstacle_tags = ["balance beam", "ball fields", "barricade", "bars", "beach", "bench", "bike rack", "concrete ledge", "court", "field", "fountain edge", "grass field", "hill", "hurdles", "outdoor gym", "park", "picnic benches", "playground", "sand dunes", "stadium steps", "stairs", "track",  "trail"]
@@ -76,8 +104,10 @@ task :obstacle_tag_inspector => :environment do
     puts workout.name + ":"
     obstacle_tags.each do |tag|
       temp = tag.tr(" ", "_")
-      puts "obstac_" + temp + "= " + workout.send("obstac_" + temp).to_s
-        end
+        if workout.send("obstac_" + temp).to_s == true
+          puts "obstac_" + temp + "= " + workout.send("obstac_" + temp).to_s
+        end 
+      end
     end
   end
 
@@ -436,6 +466,25 @@ task :fix_iconic => :environment do
   #puts errors
 end    
      
-  
+task :find_problems => :environment do
+  places = ""
+  problems = []
+  File.open('/Users/michaelmagner/code/place_names.txt', 'r') do |f1|  
+    while line = f1.gets  
+      places = places + line + "\n"
+    end   
+  end  
+Workout.all.each do |workout|
+  if places.include? workout.name
+    puts "found" 
+  else
+    problems << workout.name
+  end
+end
+    puts problems
+    
+  puts "problems:"
+  #puts problems
+end
   
       
