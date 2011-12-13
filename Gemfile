@@ -23,11 +23,11 @@ gem "therubyracer"
 
 gem "rspec-rails", :group => [:test, :development]
 
-group :development, :test do
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "guard-rspec"
-end
+# group :development, :test do
+#   gem "factory_girl_rails"
+#   gem "capybara"
+#   gem "guard-rspec"
+# end
 
 
 # Gems used only for assets and not required

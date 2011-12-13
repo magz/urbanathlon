@@ -55,7 +55,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
  
  
  
- task :deploy do
+ task :staging do
    set :application, "urbanathlon-stg.fuzzproductions.com"
    set :deploy_to, "/home/michaelmagner/var/http:/#{application}"
    
