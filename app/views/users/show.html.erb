@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Fb:</b>
+  <%= @user.fb_id %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @user.score %>
+</p>
+
+<p>
+  <b>Followed users:</b>
+  <% @user.followed_users.each do |follow| %>
+	<p>
+		<%= follow %>
+	</p>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

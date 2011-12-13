@@ -1,0 +1,7 @@
+db/backup_development.sqlite3
+db/backup_production.sqlite3
+db/xxxxxdevelopment.sqlite3
+tmp/
+db/schema.rb
+log/*
+public/*

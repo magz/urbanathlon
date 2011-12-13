@@ -1,0 +1,25 @@
+<h1>Listing workout_tags</h1>
+
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @workout_tags.each do |workout_tag| %>
+  <tr>
+    <td><%= workout_tag.category %></td>
+    <td><%= workout_tag.name %></td>
+    <td><%= link_to 'Show', workout_tag %></td>
+    <td><%= link_to 'Edit', edit_workout_tag_path(workout_tag) %></td>
+    <td><%= link_to 'Destroy', workout_tag, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Workout tag', new_workout_tag_path %>

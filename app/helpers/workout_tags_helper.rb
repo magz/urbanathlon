@@ -1,0 +1,2 @@
+module WorkoutTagsHelper
+end
