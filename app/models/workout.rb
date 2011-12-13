@@ -34,6 +34,9 @@ class Workout < ActiveRecord::Base
       end
       self.average_rating = x / self.ratings.count
       self.save
+    else
+      self.average_rating=4
+      self.save
     end
   end
 

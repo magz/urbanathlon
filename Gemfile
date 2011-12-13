@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.1'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -12,7 +12,7 @@ gem "paperclip", "~> 2.4.2"
 gem "bhm-google-maps" 
 gem "gmaps4rails"
 gem "capistrano"
-gem "pg"
+#gem "pg"
 gem "geocoder"
 gem "mongrel", "1.2.0.pre2"
 gem "mongrel_cluster"
