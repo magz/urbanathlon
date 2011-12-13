@@ -55,11 +55,11 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
  
  
  
- task :testing do
+ task :deploy do
    set :application, "urbanathlon-stg.fuzzproductions.com"
    set :deploy_to, "/home/michaelmagner/var/http:/#{application}"
    
-   set :branch, 'testing'
+   set :branch, 'deploy'
 
 
    namespace :deploy do
