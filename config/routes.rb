@@ -3,7 +3,6 @@ CmsTest::Application.routes.draw do
 
   resources :ratings
 
-  resources :workout_tags  
 
   match "flag" => "workouts#flag"
   

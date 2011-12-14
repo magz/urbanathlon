@@ -97,6 +97,5 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
  
  after "deploy", "deploy:bundle_gems"
  after "deploy:bundle:gems", "deploy:restart"
- after "deploy:restart", "deploy:cleanup"
-
+ 
  
