@@ -6,7 +6,7 @@ gem 'rails', '3.1.3'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+#gem "mysql2"
 gem 'json'
 gem "paperclip", "~> 2.4.2"
 gem "bhm-google-maps" 
@@ -14,9 +14,7 @@ gem "gmaps4rails"
 gem "capistrano"
 #gem "pg"
 gem "geocoder"
-gem "mongrel", "1.2.0.pre2"
-gem "mongrel_cluster"
-gem "rake", "~> 0.9.2.2"
+gem "rake", "~> 0.9.2"
 gem "kaminari", "~> 0.12.4"
 
 gem "therubyracer"

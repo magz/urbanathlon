@@ -64,7 +64,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
 
    namespace :deploy do
      task :bundle_gems do
-       run "cd #{deploy_to}/current && bundle install vendor/gems"
+       run "cd #{deploy_to}/current && sudo bundle install vendor/gems"
      task :start do ; end
      task :stop do ; end
      task :restart, :roles => :app, :except => { :no_release => true } do
@@ -83,7 +83,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
 
    namespace :deploy do
      task :bundle_gems do
-       run "cd #{deploy_to}/current && rm -rf .bundle && bundle install vendor/gems"
+       run "cd #{deploy_to}/current && sudo bundle install vendor/gems"
        #run "cd #{deploy_to}/current && bundle install"
      task :start do ; end
      task :stop do ; end
@@ -97,5 +97,6 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
  
  after "deploy", "deploy:bundle_gems"
  after "deploy:bundle:gems", "deploy:restart"
+ after "deploy:restart", "deploy:cleanup"
 
  

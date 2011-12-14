@@ -6,7 +6,7 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @ratings }
+      format.json { render :json => @ratings }
     end
   end
 
@@ -17,7 +17,7 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @rating }
+      format.json { render :json => @rating }
     end
   end
 
@@ -28,7 +28,7 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @rating }
+      format.json { render :json => @rating }
     end
   end
 
@@ -40,15 +40,19 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
+    if params[:fb_login]
+      params[:user_id]=User.where(:fb_id => params[:user_id]).first
+    end
+    #check to make sure fb_id is valid?  Or will this be caught in validation
     @rating = Rating.new(params[:rating])
 
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
-        format.json { render json: @rating, status: :created, location: @rating }
+        format.html { redirect_to @rating, :notice => 'Rating was successfully created.' }
+        format.json { render :json => @rating, :status => :created, :location => @rating }
       else
-        format.html { render action: "new" }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @rating.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +64,11 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
-        format.html { redirect_to @rating, notice: 'Rating was successfully updated.' }
+        format.html { redirect_to @rating, :notice => 'Rating was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @rating.errors, :status => :unprocessable_entity }
       end
     end
   end

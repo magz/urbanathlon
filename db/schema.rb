@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208001125) do
+ActiveRecord::Schema.define(:version => 20111213043327) do
 
   create_table "ratings", :force => true do |t|
     t.integer  "value"
@@ -25,17 +25,9 @@ ActiveRecord::Schema.define(:version => 20111208001125) do
     t.string   "name"
     t.string   "fb_id"
     t.integer  "score"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.text     "followed_users"
-  end
-
-  create_table "workout_tags", :force => true do |t|
-    t.string   "category"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "workout_id"
   end
 
   create_table "workouts", :force => true do |t|
@@ -60,8 +52,47 @@ ActiveRecord::Schema.define(:version => 20111208001125) do
     t.string   "MH_suggests"
     t.string   "editor_comments"
     t.string   "photo_label"
-    t.integer  "created_by_id"
-    t.integer  "average_rating"
+    t.boolean  "fit_agility"
+    t.boolean  "fit_arms_and_back"
+    t.boolean  "fit_balance"
+    t.boolean  "fit_cardio"
+    t.boolean  "fit_core"
+    t.boolean  "fit_endurance"
+    t.boolean  "fit_lower_body"
+    t.boolean  "fit_relaxation"
+    t.boolean  "fit_speed"
+    t.boolean  "fit_stability"
+    t.boolean  "fit_stretch"
+    t.boolean  "fit_stretching"
+    t.boolean  "fit_total_body"
+    t.boolean  "fit_upper_body"
+    t.boolean  "fit_whole_body"
+    t.boolean  "obstac_balance_beam"
+    t.boolean  "obstac_ball_fields"
+    t.boolean  "obstac_barricade"
+    t.boolean  "obstac_bars"
+    t.boolean  "obstac_beach"
+    t.boolean  "obstac_bench"
+    t.boolean  "obstac_bike_rack"
+    t.boolean  "obstac_concrete_ledge"
+    t.boolean  "obstac_court"
+    t.boolean  "obstac_field"
+    t.boolean  "obstac_fountain_edge"
+    t.boolean  "obstac_grass_field"
+    t.boolean  "obstac_hill"
+    t.boolean  "obstac_hurdles"
+    t.boolean  "obstac_outdoor_gym"
+    t.boolean  "obstac_park"
+    t.boolean  "obstac_picnic_benches"
+    t.boolean  "obstac_playground"
+    t.boolean  "obstac_pullup_bar"
+    t.boolean  "obstac_sand_dunes"
+    t.boolean  "obstac_stadium_steps"
+    t.boolean  "obstac_stairs"
+    t.boolean  "obstac_track"
+    t.boolean  "obstac_trail"
+    t.boolean  "user_created"
+    t.float    "average_rating"
   end
 
 end

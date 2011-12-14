@@ -70,11 +70,11 @@
 	</p>
 	<p>
 
- <% @workout.workout_tags.each do |tag| %>
+ <%# @workout.workout_tags.each do |tag| %>
 <p> 	
-<%= tag.category + " : " + tag.name  %> 
+<%#= tag.category + " : " + tag.name  %> 
 </p>
-	<% end %>
+	<%# end %>
 
 
 <%= link_to 'Edit', edit_workout_path(@workout) %> |

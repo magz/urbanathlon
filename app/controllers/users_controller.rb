@@ -1,15 +1,15 @@
-class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-  
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
-  
+ class UsersController < ApplicationController
+#   # GET /users
+#   # GET /users.json
+   def index
+     @users = User.all
+ 
+     respond_to do |format|
+       format.html # index.html.erb
+       format.json { render :json  => @users }
+     end
+   end
+
   def leaderboard
     if params[:type] == "global"
         @users = User.find(:all, :order => "score", :limit => 10)
@@ -24,9 +24,20 @@ class UsersController < ApplicationController
         @users=friends.compact.sort {|a,b| b.score <=> a.score}.slice(0,9)
         
       end
-    end    
-  end
+    end
+    #PLACEHOLDER!!! FIX FIX FIX!
+    if params[:type] == "local"
+        @users = User.find(:all, :order => "score", :limit => 10)
+    end
+        
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json  => @users }
+    end
   
+  
+  end
+
   def find_fb_friends_from_list
     @users = []
     friend_list=params[:friend_list].slice(1,params[:friend_list].length-2).split(",")
@@ -37,7 +48,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       #format.html # new.html.erb
-      format.json { render json: @users }
+      format.json { render :json  => @users }
     end
   end
   
@@ -50,57 +61,57 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
     
-  
+
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json { render :json  => @user }
     end
   end
-  
+
   # GET /users/new
   # GET /users/new.json
   def new
     @user = User.new
-  
+
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @user }
+      format.json { render :json  => @user }
     end
   end
-  
+
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
-  
+
   # POST /users
   # POST /users.json
   def create
     @user = User.new(params[:user])
-  
+
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+        format.html { redirect_to @user, :notice  => 'User was successfully created.' }
+        format.json { render :json => @user, :status => :created, :location => @user }
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action  => "new" }
+        format.json { render :json  => @user.errors, :status  => :unprocessable_entity }
       end
     end
   end
-  
+
   # PUT /users/1
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-  
+
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, :notice  => 'User was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action  => "edit" }
+        format.json { render :json  => @user.errors, :status  => :unprocessable_entity }
       end
     end
   end
@@ -118,15 +129,15 @@ class UsersController < ApplicationController
     respond_to do |format|
     
       if @user.save && @followed_user
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, :notice => 'User was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action  => "edit" }
+        format.json { render :json  => @user.errors, :status  => :unprocessable_entity }
       end
     end
   end
-  
+
   def remove_followed_user
     #NOTE: THIS ONLY INTAKES A SINGLE USER...COULD BE FIXED W/O TOO MUCH TROUBLE THOUGH
     #this and its counterpart assume fb_id
@@ -140,11 +151,11 @@ class UsersController < ApplicationController
     respond_to do |format|
     
       if @user.save && @followed_user
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, :notice  => 'User was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :action  => "edit" }
+        format.json { render :json  => @user.errors, :status  => :unprocessable_entity }
       end
     end
   end
@@ -154,10 +165,10 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-  
+
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :ok }
     end
   end
-end
+ end
