@@ -17,9 +17,10 @@
 
 <p>
   <b>Followed users:</b>
-  <% @user.followed_users.each do |follow| %>
+	<% @user.followed_users.each do |follow| %>
 	<p>
-		<%= follow %>
+		<% #probably move this to the controller%>
+	  	<%= User.find(follow).name %>
 	</p>
 	<% end %>
 </p>
