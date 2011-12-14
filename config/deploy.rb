@@ -83,7 +83,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
 
    namespace :deploy do
      task :bundle_gems do
-       #run "cd #{deploy_to}/current && bundle install vendor/gems"
+       run "cd #{deploy_to}/current && rm -rf .bundle && bundle install vendor/gems"
        #run "cd #{deploy_to}/current && bundle install"
      task :start do ; end
      task :stop do ; end
