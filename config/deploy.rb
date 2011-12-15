@@ -64,7 +64,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
 
    namespace :deploy do
      task :bundle_gems do
-       run "cd #{deploy_to}/current && sudo bundle install vendor/gems"
+       #run "cd #{deploy_to}/current && sudo bundle install vendor/gems"
      task :start do ; end
      task :stop do ; end
      task :restart, :roles => :app, :except => { :no_release => true } do
@@ -74,7 +74,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
    end
  end
  
- task :staging do
+ task :production do
    set :application, "urbanathlon.fuzzproductions.com"
    set :deploy_to, "/home/michaelmagner/var/http:/#{application}"
    
@@ -94,7 +94,7 @@ server "urbanathlon.fuzzproductions.com", :app, :web, :db, :primary => true
  end
  
  
- after "deploy", "deploy:bundle_gems"
- after "deploy:bundle:gems", "deploy:restart"
+ # after "deploy", "deploy:bundle_gems"
+ # after "deploy:bundle:gems", "deploy:restart"
  
  
