@@ -1,4 +1,6 @@
 CmsTest::Application.routes.draw do
+  resources :favorites
+
   resources :users
 
   resources :ratings

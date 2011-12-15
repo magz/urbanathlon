@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213043327) do
+ActiveRecord::Schema.define(:version => 20111215202650) do
+
+  create_table "favorites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "workout_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ratings", :force => true do |t|
     t.integer  "value"
@@ -28,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20111213043327) do
     t.text     "followed_users"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "favorite_workouts"
+    t.string   "city"
+  end
+
+  create_table "workout_tags", :force => true do |t|
+    t.string   "category"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "workout_id"
   end
 
   create_table "workouts", :force => true do |t|
@@ -93,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20111213043327) do
     t.boolean  "obstac_trail"
     t.boolean  "user_created"
     t.float    "average_rating"
+    t.integer  "user_id"
   end
 
 end
