@@ -55,16 +55,52 @@
   # GET /users/1
   # GET /users/1.json
   def show
-    if params[:fb_login]
+    if params[:fb] 
       @user = User.where_fb_id(params[:id])
+    
+      result={}
+      @user.attributes.each do |k,v|
+        if k != "favorite_workouts"
+          result.update(k => v)
+        end
+      end
+
+      workouts = Workout.where(:user_id => @user)
+      favorites = Favorite.where(:user_id => @user)
+      ratings = Rating.where(:user_id => @user)
+      favorite_workouts = []
+      completed = []
+      
+      favorites.each do |f|
+        begin
+          favorite_workouts << Workout.find(f.workout_id)
+        rescue
+        end
+      end
+      favorite_workouts.compact!
+      
+      
+      ratings.each do |f|
+        begin
+          completed << Workout.find(f.workout_id)
+        rescue
+        end
+      end
+      completed.compact!
+      
+      friends = User.where(:fb_id => params[:id])
+      result.update(:favorites => favorite_workouts)
+      result.update(:workouts => workouts)
+      result.update(:followed_users => friends)
+      result.update(:completed => completed)
+    
     else
       @user = User.find(params[:id])
     end
     
-
     respond_to do |format|
       format.html # show.html.erb
-      format.json  { render :json => @user.to_json(:include => [:workouts, :favorites])}
+      format.json  { render :json => result}
     end
   end
   
