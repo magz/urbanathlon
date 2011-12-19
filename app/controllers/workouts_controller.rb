@@ -52,6 +52,10 @@ class WorkoutsController < ApplicationController
   # POST /workouts
   # POST /workouts.json
   def create
+    if params[:fb]
+      params[:workout][:user_id] = User.where(:fb_id => params[:user_id]).first.id
+    end
+    
     @workout = Workout.new(params[:workout])
 
     respond_to do |format|

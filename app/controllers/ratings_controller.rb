@@ -40,7 +40,7 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    if params[:fb_login] == true || :params[fb] == true
+    if params[:fb_login] == true || params[:fb] == true 
       params[:rating][:user_id]=User.where(:fb_id => params[:user_id]).first
     end
     #check to make sure fb_id is valid?  Or will this be caught in validation
