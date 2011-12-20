@@ -16,9 +16,9 @@
     end
     #this probably needs some more checking for edge cases
     if params[:type]=="friends"
-      if params[:user]
+      if params[:user_id]
         friends = []
-        User.where_fb_id(params[:user]).followed_users.each do |friend|
+        User.where_fb_id(params[:user_id]).followed_users.each do |friend|
           friends << User.find(friend)
         end
         @users=friends.compact.sort {|a,b| b.score <=> a.score}.slice(0,9)
@@ -28,6 +28,7 @@
     #PLACEHOLDER!!! FIX FIX FIX!
     if params[:type] == "local"
         @users = User.find(:all, :order => "score", :limit => 10)
+        #params[:lat], params[:log]
     end
         
     respond_to do |format|
@@ -55,6 +56,8 @@
   # GET /users/1
   # GET /users/1.json
   def show
+    #should be able to move this over to the render verbose json function in the model
+    #better encapsulation...this is too long for the controller
     if params[:fb] 
       @user = User.where_fb_id(params[:id])
     

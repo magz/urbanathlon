@@ -1,4 +1,6 @@
 CmsTest::Application.routes.draw do
+  resources :workout_tags
+
   resources :favorites
 
   resources :users

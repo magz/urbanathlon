@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
    super(params)
    self.score=0
    self.followed_users=[]
-   self.favorite_workouts=[]
   end
 
   def self.generate_local_leaderboard
@@ -20,30 +19,35 @@ class User < ActiveRecord::Base
     user=User.where(:fb_id => facebook).first
   end  
   
-  def to_verbose_json
-    result=self.to_json[0, self.to_json.length-1]
-    
-    result += ", ratings: ["
-    if self.ratings != []
-      self.ratings do |rating|
-        result += rating.to_json + ","
+  def to_verbose_json(user)
+    result={}
+    user.attributes.each do |k,v|
+      #this if statement is to keep some @user attributes out of results...it feels like it shouldn't be needed, since update should overwrite it, but that doesn't seem to be happening...fix this
+      if k != "favorite_workouts" && k != "followed_users"
+        result.update(k => v)
       end
-      result = result[0, result.length-1]
     end
-    result += "]"
-        
-    
-    result += ", created_workouts: ["
-    if Workout.where(:user_id => self) != []
-      Workout.where(:user_id => self).each do |workout|
-        result += workout.to_json + ","
-      end
-    result = result[0, result.length-1]
-    end
-    result += "]"
-    
   
-    result += "}"
+    #test this...i'm pretty sure it works though!  GJ magz!
+    [[Workout, :workouts], [Favorite, :favorites], [Rating, :completed]].each do |cat, sym|
+    #pull the full workout/favorites/ratings attributes out of the database
+      temp=[]
+      cat.where(:user_id => user).each do |f|
+        temp << f
+      end
+      result.update(sym => temp)
+    end
+    
+    
+    #this one i think is necessary, since it is collecting the attributes of the followed_users
+    @user.followed_users.each do |f|
+      begin
+      friends << User.find(f).attributes
+      rescue
+      end
+    end
+    result.update(:followed_users => friends)
+    #and now this should return result
   end
     
   def update_average_rating
